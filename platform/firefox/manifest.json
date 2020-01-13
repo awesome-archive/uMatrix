@@ -1,5 +1,5 @@
 {
-    "applications": {
+    "browser_specific_settings": {
         "gecko": {
             "id": "uMatrix@raymondhill.net",
             "strict_min_version": "56.0a1"
@@ -20,7 +20,7 @@
     "content_scripts": [
     {
         "matches": ["http://*/*", "https://*/*"],
-        "js": ["/js/vapi-client.js", "/js/contentscript-start.js"],
+        "js": ["/js/vapi.js", "/js/vapi-client.js", "/js/contentscript-start.js"],
         "run_at": "document_start",
         "all_frames": true
         },
@@ -46,6 +46,7 @@
     "permissions": [
         "browsingData",
         "cookies",
+        "dns",
         "privacy",
         "storage",
         "tabs",

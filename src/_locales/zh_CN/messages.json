@@ -71,8 +71,8 @@
         "message": "脚本",
         "description": "HAS TO FIT IN MATRIX HEADER!"
     },
-    "xhrPrettyName": {
-        "message": "XHR",
+    "fetchPrettyName": {
+        "message": "fetch",
         "description": "HAS TO FIT IN MATRIX HEADER!"
     },
     "framePrettyName": {
@@ -132,7 +132,11 @@
         "description": "A menu entry in the matrix popup"
     },
     "matrixSwitchNoscriptSpoof": {
-        "message": "模拟 <code><noscript><\/code> 元素",
+        "message": "模拟 <code><noscript></code> 元素",
+        "description": "A menu entry in the matrix popup"
+    },
+    "matrixSwitchRevealCname": {
+        "message": "显示真实域名",
         "description": "A menu entry in the matrix popup"
     },
     "matrixRevertAllEntry": {
@@ -168,15 +172,15 @@
         "description": ""
     },
     "statsPageCookieHeadersFoiled": {
-        "message": "已阻止<a href='https:\/\/zh.wikipedia.org\/wiki\/Cookie'>HTTP Cookie<\/a>请求头：{{count}} 次",
+        "message": "已阻止<a href='https://zh.wikipedia.org/wiki/Cookie'>HTTP Cookie</a>请求头：{{count}} 次",
         "description": ""
     },
     "statsPageRefererHeadersFoiled": {
-        "message": "已阻止<a href='https:\/\/zh.wikipedia.org\/wiki\/HTTP%E5%8F%82%E7%85%A7%E4%BD%8D%E5%9D%80'>HTTP来源地址<\/a>请求头：{{count}} 次",
+        "message": "已阻止<a href='https://zh.wikipedia.org/wiki/HTTP%E5%8F%82%E7%85%A7%E4%BD%8D%E5%9D%80'>HTTP来源地址</a>请求头：{{count}} 次",
         "description": ""
     },
     "statsPageHyperlinkAuditingFoiled": {
-        "message": "已阻止<a href='https:\/\/html.spec.whatwg.org\/multipage\/semantics.html#hyperlink-auditing'>超链接审查<\/a>尝试：{{count}} 次",
+        "message": "已阻止<a href='https://html.spec.whatwg.org/multipage/semantics.html#hyperlink-auditing'>超链接审查</a>尝试：{{count}} 次",
         "description": ""
     },
     "statsPageCookiesRemoved": {
@@ -184,7 +188,7 @@
         "description": ""
     },
     "statsPageLocalStoragesCleared": {
-        "message": "已清空<a href='http:\/\/diveintohtml5.info\/storage.html'>本地存储<\/a>：{{count}} 个",
+        "message": "已清空<a href='http://diveintohtml5.info/storage.html'>本地存储</a>：{{count}} 个",
         "description": ""
     },
     "statsPageBrowserCacheCleared": {
@@ -264,7 +268,7 @@
         "description": ""
     },
     "statsPageLogSizePrompt1": {
-        "message": "记住<b>每个页面<\/b>最近的",
+        "message": "记住<b>每个页面</b>最近的",
         "description": "First part of Remember the last [n] HTTP requests per page"
     },
     "statsPageLogSizePrompt2": {
@@ -272,12 +276,160 @@
         "description": "Second part of Remember the last [n] HTTP requests per page"
     },
     "statsPageLogSizeHelp": {
-        "message": "<p>您可以查看最近网页所发出的原始 HTTP 请求的细节（见下）。<\/p><p>这对于想要检测网页确切行为的高级用户尤为实用。但记录 HTTP 请求会消耗内存，如果您并不在意这些技术细节，内存便等同于被浪费。<\/p><p>此区域将允许您调整最多保留多少最近的 HTTP 请求，以便您进一步审查。<\/p><p>输入 &ldquo;<code>0<\/code>&rdquo; 将关闭详细日志（从而减少 <i>uMatrix<\/i> 的内存占用）。<\/p>",
+        "message": "<p>您可以查看最近网页所发出的原始 HTTP 请求的细节（见下）。</p><p>这对于想要检测网页确切行为的高级用户尤为实用。但记录 HTTP 请求会消耗内存，如果您并不在意这些技术细节，内存便等同于被浪费。</p><p>此区域将允许您调整最多保留多少最近的 HTTP 请求，以便您进一步审查。</p><p>输入 &ldquo;<code>0</code>&rdquo; 将关闭详细日志（从而减少 <i>uMatrix</i> 的内存占用）。</p>",
         "description": "To help user understand the purpose of the log size value"
     },
     "statsPageRefresh": {
         "message": "刷新",
         "description": ""
+    },
+    "logAll": {
+        "message": "全部",
+        "description": "Appears in the logger's tab selector"
+    },
+    "logBehindTheScene": {
+        "message": "后台网络请求",
+        "description": "Pretty name for behind-the-scene network requests"
+    },
+    "loggerCurrentTab": {
+        "message": "当前标签页",
+        "description": "Appears in the logger's tab selector"
+    },
+    "loggerReloadTip": {
+        "message": "重新加载该标签页的内容",
+        "description": "Tooltip for the reload button in the logger page"
+    },
+    "loggerFilterInputPlaceholder": {
+        "message": "日志过滤表达式",
+        "description": "Appears in the input filed where filter expressions are entered"
+    },
+    "loggerEntryCookieDeleted": {
+        "message": "已删除 Cookie：{{value}}",
+        "description": "An entry for when a cookie is deleted"
+    },
+    "loggerEntryDeleteCookieError": {
+        "message": "无法删除 Cookie：{{value}}",
+        "description": "An entry for when the browser cache is cleared"
+    },
+    "loggerEntryBrowserCacheCleared": {
+        "message": "浏览器缓存清除完毕",
+        "description": "An entry for when a cookie can't be deleted"
+    },
+    "loggerEntryAssetUpdated": {
+        "message": "辅助规则已更新：{{value}}",
+        "description": "An entry for when an asset was updated"
+    },
+    "loggerRowFiltererButtonTip": {
+        "message": "开闭记录筛选",
+        "description": "Tooltip for the row filterer button in the logger page"
+    },
+    "logFilterPrompt": {
+        "message": "筛选记录条目",
+        "description": "Placeholder string for logger output filtering input field"
+    },
+    "loggerPopupPanelTip": {
+        "message": "开闭弹出面板",
+        "description": "Tooltip for the popup panel button in the logger page"
+    },
+    "loggerInfoTip": {
+        "message": "uBlock Origin wiki：记录器",
+        "description": "Tooltip for the top-right info label in the logger page"
+    },
+    "loggerClearTip": {
+        "message": "清空记录",
+        "description": "Tooltip for the eraser in the logger page; used to blank the content of the logger"
+    },
+    "loggerPauseTip": {
+        "message": "暂停记录（放弃所有传入数据）",
+        "description": "Tooltip for the pause button in the logger page"
+    },
+    "loggerUnpauseTip": {
+        "message": "取消暂停记录",
+        "description": "Tooltip for the play button in the logger page"
+    },
+    "loggerRowFiltererBuiltinTip": {
+        "message": "记录器筛选设定",
+        "description": "Tooltip for the button to bring up logger output filtering options"
+    },
+    "loggerRowFiltererBuiltinNot": {
+        "message": "非",
+        "description": "A keyword in the built-in row filtering expression"
+    },
+    "loggerRowFiltererBuiltinBlocked": {
+        "message": "已屏蔽",
+        "description": "A keyword in the built-in row filtering expression"
+    },
+    "loggerRowFiltererBuiltinInfo": {
+        "message": "提示信息",
+        "description": "A keyword in the built-in row filtering expression"
+    },
+    "loggerRowFiltererBuiltin1p": {
+        "message": "第一方",
+        "description": "A keyword in the built-in row filtering expression"
+    },
+    "loggerRowFiltererBuiltin3p": {
+        "message": "第三方",
+        "description": "A keyword in the built-in row filtering expression"
+    },
+    "loggerEntryDetailsHeader": {
+        "message": "详细资料",
+        "description": "Small header to identify the 'Details' pane for a specific logger entry"
+    },
+    "loggerEntryDetailsContext": {
+        "message": "上下文",
+        "description": "Label to identify a context field (typically a hostname)"
+    },
+    "loggerEntryDetailsPartyness": {
+        "message": "第一方/第三方",
+        "description": "Label to identify a field providing partyness information"
+    },
+    "loggerEntryDetailsType": {
+        "message": "类型",
+        "description": "Label to identify the type of an entry"
+    },
+    "loggerEntryDetailsURL": {
+        "message": "URL",
+        "description": "Label to identify the URL of an entry"
+    },
+    "loggerEntryRuleHeader": {
+        "message": "规则",
+        "description": "Small header to identify the 'Rule' pane for a specific logger entry"
+    },
+    "loggerSettingDiscardPrompt": {
+        "message": "不符合以下任一状况的记录将会被自动清除：",
+        "description": "Logger setting: A sentence to describe the purpose of the settings below"
+    },
+    "loggerSettingPerEntryMaxAge": {
+        "message": "最多保留 {{input}} 分钟以内的记录",
+        "description": "A logger setting"
+    },
+    "loggerSettingPerTabMaxLoads": {
+        "message": "每个分页最多保留 {{input}} 次内容加载产生的记录",
+        "description": "A logger setting"
+    },
+    "loggerSettingPerTabMaxEntries": {
+        "message": "每个分页最多保留 {{input}} 条记录",
+        "description": "A logger setting"
+    },
+    "loggerSettingPerEntryLineCount": {
+        "message": "垂直扩展模式下每项使用 {{input}} 行",
+        "description": "A logger setting"
+    },
+    "loggerExportFormatList": {
+        "message": "列表",
+        "description": "Label for radio-button to pick export format"
+    },
+    "loggerExportFormatTable": {
+        "message": "表格",
+        "description": "Label for radio-button to pick export format"
+    },
+    "loggerExportEncodePlain": {
+        "message": "纯文本",
+        "description": "Label for radio-button to pick export text format"
+    },
+    "loggerExportEncodeMarkdown": {
+        "message": "Markdown",
+        "description": "Label for radio-button to pick export text format"
     },
     "settingsPageTitle": {
         "message": "uMatrix &ndash; 设置",
@@ -320,15 +472,15 @@
         "description": "Scope will be full hostname of site"
     },
     "settingsCollapseBlocked": {
-        "message": "隐藏已拦截请求所关联的页面内容",
-        "description": "English: Collapse placeholder of blocked elements"
+        "message": "隐藏已屏蔽元素的占位符",
+        "description": "A setting in the dashboard's Settings pane"
     },
     "settingsCollapseBlacklisted": {
-        "message": "隐藏因域名黑名单而被屏蔽的內容",
+        "message": "隐藏被加入黑名单的元素的占位符",
         "description": "A setting in the dashboard's Settings pane: 'blacklisted' means 'for which there is a specific block rule', 'specific' means 'a rule for which the destination hostname is not `*`'"
     },
     "settingsNoscriptTagsSpoofed": {
-        "message": "当第一方脚本被屏蔽时尝试模拟还原 <code><noscript><\/code> 网页元素",
+        "message": "当第一方脚本被屏蔽时尝试模拟还原 <code><noscript></code> 网页元素",
         "description": "This appears in the Settings pane in the dashboard"
     },
     "settingsCloudStorageEnabled": {
@@ -348,7 +500,7 @@
         "description": ""
     },
     "privacyDeleteBlockedCookiesHelp": {
-        "message": "<p><i>uMatrix<\/i> 默认不阻止黑名单中的 Cookie 进入您的浏览器，而是阻止它们离开您的浏览器，是因后者更具有意义。不在 Cookie 进入浏览器之前阻止它们将使您有机会得知网站正尝试使用 Cookie，以便您有需要时进一步查看。<\/p><p>若黑名单中的 Cookie 被 <i>uMatrix<\/i> 所计入则可如愿将其移除。<\/p><p><b>重要提示：<\/b>浏览器扩展在其运作期间发出网络请求时可能会产生 Cookie。如果 Cookie 所在域名尚未被列入白名单，则 <i>uMatrix<\/i> 会于该选项开启之时移除这些 Cookie。请确保用于扩展通信的域名处于白名单内。<\/p>",
+        "message": "<p><i>uMatrix</i> 默认不阻止黑名单中的 Cookie 进入您的浏览器，而是阻止它们离开您的浏览器，是因后者更具有意义。不在 Cookie 进入浏览器之前阻止它们将使您有机会得知网站正尝试使用 Cookie，以便您有需要时进一步查看。</p><p>若黑名单中的 Cookie 被 <i>uMatrix</i> 所计入则可如愿将其移除。</p><p><b>重要提示：</b>浏览器扩展在其运作期间发出网络请求时可能会产生 Cookie。如果 Cookie 所在域名尚未被列入白名单，则 <i>uMatrix</i> 会于该选项开启之时移除这些 Cookie。请确保用于扩展通信的域名处于白名单内。</p>",
         "description": ""
     },
     "privacyDeleteNonBlockedSessionCookiesPrompt1": {
@@ -360,11 +512,11 @@
         "description": "Second part of 'Delete non-blocked session cookies [n] minutes after the last time they have been used'"
     },
     "privacyDeleteNonBlockedSessionCookiesHelp": {
-        "message": "<p><a href='http:\/\/www.w3.org\/2001\/tag\/2010\/09\/ClientSideStorage.html'>W3C<\/a>：“会话 Cookie……将在您结束浏览器会话时被清除。会话 Cookie 被存储于临时内存中，浏览器关闭后将不再保留。”<\/p><p>不过在使用某些浏览器时，这一行为<a href='https:\/\/code.google.com\/p\/chromium\/issues\/detail?id=128513'>有可能并不会发生<\/a>。另外，对某些人而言，必须在浏览器关闭后才能清除会话 Cookie 可能有些过迟。<\/p>",
+        "message": "<p><a href='http://www.w3.org/2001/tag/2010/09/ClientSideStorage.html'>W3C</a>：“会话 Cookie……将在您结束浏览器会话时被清除。会话 Cookie 被存储于临时内存中，浏览器关闭后将不再保留。”</p><p>不过在使用某些浏览器时，这一行为<a href='https://code.google.com/p/chromium/issues/detail?id=128513'>有可能并不会发生</a>。另外，对某些人而言，必须在浏览器关闭后才能清除会话 Cookie 可能有些过迟。</p>",
         "description": ""
     },
     "privacyDeleteBlockedLocalStoragePrompt": {
-        "message": "连同被屏蔽的 Cookie 一並删除相关域名下的<a href='https:\/\/zh.wikipedia.org\/wiki\/%E7%BD%91%E9%A1%B5%E5%AD%98%E5%82%A8#.E6.9C.AC.E5.9C.B0.E5.8F.8A.E6.9C.83.E8.A9.B1.E5.AD.98.E5.84.B2'>本地存储<\/a>数据",
+        "message": "连同被屏蔽的 Cookie 一並删除相关域名下的<a href='https://zh.wikipedia.org/wiki/%E7%BD%91%E9%A1%B5%E5%AD%98%E5%82%A8#.E6.9C.AC.E5.9C.B0.E5.8F.8A.E6.9C.83.E8.A9.B1.E5.AD.98.E5.84.B2'>本地存储</a>数据",
         "description": ""
     },
     "privacyDeleteBlockedLocalStorageHelp": {
@@ -380,15 +532,15 @@
         "description": "Second part of 'Clear browser cache every [n] minutes'"
     },
     "privacyClearCacheHelp": {
-        "message": "<p>某些网站特别热衷于跟踪，以至于为规避您的反跟踪举措，会使用一些不太光彩的手段。<\/p><p>一部分诡计利用了<a href='https:\/\/zh.wikipedia.org\/wiki\/%E7%BD%91%E9%A1%B5%E5%BF%AB%E7%85%A7'>浏览器缓存<\/a><sup>[1, 2]<\/sup>，因为缓存内容通常会长期储留，用户也基本不会去亲自清理。<\/p><p>定期清理浏览器缓存其实并不怎么麻烦（甚至很可能不会被注意到），且贵在可以保护您的隐私免受跟踪者侵犯。<\/p><p>启用该设置将容许 <i>uMatrix<\/i> 依您指定的时间定期为您完成该项工作。<\/p><p>[1] <a href='https:\/\/grepular.com\/Preventing_Web_Tracking_via_the_Browser_Cache'>“阻止利用浏览器缓存进行网络追踪”<\/a>\n[2] <a href='http:\/\/lucb1e.com\/rp\/cookielesscookies\/'>“Cookieless Cookies”<\/a><\/p>",
+        "message": "<p>某些网站特别热衷于跟踪，以至于为规避您的反跟踪举措，会使用一些不太光彩的手段。</p><p>一部分诡计利用了<a href='https://zh.wikipedia.org/wiki/%E7%BD%91%E9%A1%B5%E5%BF%AB%E7%85%A7'>浏览器缓存</a><sup>[1, 2]</sup>，因为缓存内容通常会长期储留，用户也基本不会去亲自清理。</p><p>定期清理浏览器缓存其实并不怎么麻烦（甚至很可能不会被注意到），且贵在可以保护您的隐私免受跟踪者侵犯。</p><p>启用该设置将容许 <i>uMatrix</i> 依您指定的时间定期为您完成该项工作。</p><p>[1] <a href='https://grepular.com/Preventing_Web_Tracking_via_the_Browser_Cache'>“阻止利用浏览器缓存进行网络追踪”</a>\n[2] <a href='http://lucb1e.com/rp/cookielesscookies/'>“Cookieless Cookies”</a></p>",
         "description": ""
     },
     "privacyProcessRefererPrompt": {
-        "message": "伪造网页第三方请求中的 <a href='https:\/\/zh.wikipedia.org\/wiki\/HTTP%E5%8F%83%E7%85%A7%E4%BD%8D%E5%9D%80'>HTTP 来源地址<\/a>",
+        "message": "伪造网页第三方请求中的 <a href='https://zh.wikipedia.org/wiki/HTTP%E5%8F%83%E7%85%A7%E4%BD%8D%E5%9D%80'>HTTP 来源地址</a>",
         "description": ""
     },
     "privacyProcessRefererHelp": {
-        "message": "维基百科：<blockquote>HTTP 来源地址是一个用于辨识请求来源网址的内容标识。……<b>由于来源地址可能会泄漏隐私，某些浏览器允许用户禁止发送来源地址。<\/b><\/blockquote>若启用该设置，<i>uMatrix<\/i> 则会在来源网页请求的 HTTP 来源地址中包含的域名与请求资源所在域名有差别时伪造来源地址。",
+        "message": "维基百科：<blockquote>HTTP 来源地址是一个用于辨识请求来源网址的内容标识。……<b>由于来源地址可能会泄漏隐私，某些浏览器允许用户禁止发送来源地址。</b></blockquote>若启用该设置，<i>uMatrix</i> 则会在来源网页请求的 HTTP 来源地址中包含的域名与请求资源所在域名有差别时伪造来源地址。",
         "description": ""
     },
     "privacyNoMixedContentPrompt": {
@@ -396,15 +548,15 @@
         "description": ""
     },
     "privacyNoMixedContentHelp": {
-        "message": "<p><a href='https:\/\/developer.mozilla.org\/docs\/Security\/MixedContent'>Mozilla 开发者网络<\/a>告知：<\/p><blockquote>若 HTTPS 页面包含未经加密的普通 HTTP 网页内容，则当前连接只是部分加密；未加密的部分将容许他人窥视甚至被中间人篡改，故连接并非完全安全。当该情况发生时，当前页面即为混合内容页面。<\/blockquote>",
+        "message": "<p><a href='https://developer.mozilla.org/docs/Security/MixedContent'>Mozilla 开发者网络</a>告知：</p><blockquote>若 HTTPS 页面包含未经加密的普通 HTTP 网页内容，则当前连接只是部分加密；未加密的部分将容许他人窥视甚至被中间人篡改，故连接并非完全安全。当该情况发生时，当前页面即为混合内容页面。</blockquote>",
         "description": ""
     },
     "privacyProcessHyperlinkAuditingPrompt": {
-        "message": "禁止<a href='https:\/\/html.spec.whatwg.org\/multipage\/semantics.html#hyperlink-auditing'>超链接审查<\/a>",
+        "message": "禁止<a href='https://html.spec.whatwg.org/multipage/semantics.html#hyperlink-auditing'>超链接审查</a>",
         "description": ""
     },
     "privacyProcessHyperlinkAuditingHelp": {
-        "message": "<p>超链接审查容许<b>任何人<\/b>得知用户于特定网页上点击了某个链接。其本质为一种跟踪手段：经由容许网站或任何第三方获知您于哪个页面点击了哪个链接，以达到追踪您的浏览活动这一特定目的。<\/p>",
+        "message": "<p>超链接审查容许<b>任何人</b>得知用户于特定网页上点击了某个链接。其本质为一种跟踪手段：经由容许网站或任何第三方获知您于哪个页面点击了哪个链接，以达到追踪您的浏览活动这一特定目的。</p>",
         "description": ""
     },
     "userRulesPermanentHeader": {
@@ -464,7 +616,7 @@
         "description": ""
     },
     "hostsFilesPerFileStats": {
-        "message": "{{used}}\/{{total}} 使用中",
+        "message": "{{used}}/{{total}} 使用中",
         "description": ""
     },
     "hostsFilesLastUpdate": {
@@ -532,7 +684,7 @@
         "description": ""
     },
     "aboutChangelog": {
-        "message": "<a href='https:\/\/github.com\/gorhill\/uMatrix\/releases'>更新日志<\/a>",
+        "message": "<a href='https://github.com/gorhill/uMatrix/releases'>更新日志</a>",
         "description": ""
     },
     "aboutStorageUsed": {
@@ -540,11 +692,11 @@
         "description": ""
     },
     "aboutDoc": {
-        "message": "<a href='https:\/\/github.com\/gorhill\/uMatrix\/wiki'>帮助文档<\/a>",
+        "message": "<a href='https://github.com/gorhill/uMatrix/wiki'>帮助文档</a>",
         "description": ""
     },
     "aboutPermissions": {
-        "message": "<a href='https:\/\/github.com\/gorhill\/uMatrix\/wiki\/Permissions'>权限说明<\/a>",
+        "message": "<a href='https://github.com/gorhill/uMatrix/wiki/Permissions'>权限说明</a>",
         "description": ""
     },
     "aboutCode": {
@@ -607,30 +759,6 @@
         "message": "注意！这将移除您的所有个人设置。您确定要继续吗？",
         "description": "Message asking user to confirm reset"
     },
-    "loggerFilterInputPlaceholder": {
-        "message": "规则过滤表达式",
-        "description": "Appears in the input filed where filter expressions are entered"
-    },
-    "loggerMaxEntriesTip": {
-        "message": "日志条数限制",
-        "description": "Appears as a tooltip when hovering the input field"
-    },
-    "loggerEntryCookieDeleted": {
-        "message": "已删除 Cookie：{{value}}",
-        "description": "An entry for when a cookie is deleted"
-    },
-    "loggerEntryDeleteCookieError": {
-        "message": "无法删除 Cookie：{{value}}",
-        "description": "An entry for when the browser cache is cleared"
-    },
-    "loggerEntryBrowserCacheCleared": {
-        "message": "浏览器缓存清除完毕",
-        "description": "An entry for when a cookie can't be deleted"
-    },
-    "loggerEntryAssetUpdated": {
-        "message": "辅助规则已更新：{{value}}",
-        "description": "An entry for when an asset was updated"
-    },
     "mainBlockedPrompt1": {
         "message": "uMatrix 已阻止载入以下页面：",
         "description": "English: uMatrix has prevented the following page from loading:"
@@ -641,7 +769,7 @@
     },
     "mainBlockedNoParamsPrompt": {
         "message": "不带参数",
-        "description": "label to be used for the parameter-less URL: https:\/\/cloud.githubusercontent.com\/assets\/585534\/9832014\/bfb1b8f0-593b-11e5-8a27-fba472a5529a.png"
+        "description": "label to be used for the parameter-less URL: https://cloud.githubusercontent.com/assets/585534/9832014/bfb1b8f0-593b-11e5-8a27-fba472a5529a.png"
     },
     "mainBlockedBack": {
         "message": "返回",
@@ -730,5 +858,9 @@
     "genericApplyChanges": {
         "message": "应用变更",
         "description": "for generic 'Apply changes' buttons"
+    },
+    "genericCopyToClipboard": {
+        "message": "复制到剪贴板",
+        "description": "Label for buttons used to copy something to the clipboard"
     }
 }

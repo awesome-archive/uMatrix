@@ -19,37 +19,71 @@
     Home: https://github.com/gorhill/uMatrix
 */
 
-// ORDER IS IMPORTANT
-
-/******************************************************************************/
-
-// Load everything
-
-(function() {
-
 'use strict';
 
 /******************************************************************************/
 
-var µm = µMatrix;
+(async ( ) => {
+    const µm = µMatrix;
 
-/******************************************************************************/
+    await Promise.all([
+        µm.loadRawSettings(),
+        µm.loadUserSettings(),
+    ]);
+    log.info(`User settings ready ${Date.now()-vAPI.T0} ms after launch`);
 
-var processCallbackQueue = function(queue, callback) {
-    var processOne = function() {
-        var fn = queue.pop();
-        if ( fn ) {
-            fn(processOne);
-        } else if ( typeof callback === 'function' ) {
-            callback();
+    const shouldWASM =
+        vAPI.canWASM === true &&
+        µm.rawSettings.disableWebAssembly !== true;
+    if ( shouldWASM ) {
+        await Promise.all([
+            µm.HNTrieContainer.enableWASM(),
+            self.publicSuffixList.enableWASM(),
+        ]);
+        log.info(`WASM modules ready ${Date.now()-vAPI.T0} ms after launch`);
+    }
+
+    await µm.loadPublicSuffixList(),
+    log.info(`PSL ready ${Date.now()-vAPI.T0} ms after launch`);
+
+    {
+        let trieDetails;
+        try {
+            trieDetails = JSON.parse(
+                vAPI.localStorage.getItem('ubiquitousBlacklist.trieDetails')
+            );
+        } catch(ex) {
         }
-    };
-    processOne();
-};
+        µm.ubiquitousBlacklist = new µm.HNTrieContainer(trieDetails);
+        if ( shouldWASM ) {
+            µm.ubiquitousBlacklist.initWASM();
+        }
+    }
+    log.info(`Ubiquitous block rules container ready ${Date.now()-vAPI.T0} ms after launch`);
 
-/******************************************************************************/
+    await Promise.all([
+        µm.loadMatrix(),
+        µm.loadHostsFiles(),
+    ]);
+    log.info(`All rules ready ${Date.now()-vAPI.T0} ms after launch`);
 
-var onAllDone = function() {
+    {
+        const pageStore =
+            µm.pageStoreFactory(µm.tabContextManager.mustLookup(vAPI.noTabId));
+        pageStore.title = vAPI.i18n('statsPageDetailedBehindTheScenePage');
+        µm.pageStores.set(vAPI.noTabId, pageStore);
+    }
+
+    const tabs = await vAPI.tabs.query({ url: '<all_urls>' });
+    if ( Array.isArray(tabs) ) {
+        for ( const tab of tabs ) {
+            µm.tabContextManager.push(tab.id, tab.url, 'newURL');
+            µm.bindTabToPageStats(tab.id);
+            µm.setPageStoreTitle(tab.id, tab.title);
+        }
+    }
+    log.info(`Tab stores ready ${Date.now()-vAPI.T0} ms after launch`);
+
     µm.webRequest.start();
 
     µm.loadRecipes();
@@ -59,57 +93,6 @@ var onAllDone = function() {
     //   asset updater.
     µm.assets.addObserver(µm.assetObserver.bind(µm));
     µm.scheduleAssetUpdater(µm.userSettings.autoUpdate ? 7 * 60 * 1000 : 0);
-
-    vAPI.cloud.start([ 'myRulesPane' ]);
-};
-
-/******************************************************************************/
-
-var onPSLReady = function() {
-    // TODO: Promisify
-    let count = 4;
-    const countdown = ( ) => {
-        count -= 1;
-        if ( count !== 0 ) { return; }
-        onAllDone();
-    };
-
-    µm.loadRawSettings(countdown);
-    µm.loadMatrix(countdown);
-    µm.loadHostsFiles(countdown);
-
-    vAPI.tabs.getAll(tabs => {
-        const pageStore =
-            µm.pageStoreFactory(µm.tabContextManager.mustLookup(vAPI.noTabId));
-        pageStore.title = vAPI.i18n('statsPageDetailedBehindTheScenePage');
-        µm.pageStores.set(vAPI.noTabId, pageStore);
-
-        if ( Array.isArray(tabs) ) {
-            for ( const tab of tabs ) {
-                µm.tabContextManager.push(tab.id, tab.url, 'newURL');
-            }
-        }
-        countdown();
-    });
-};
-
-/******************************************************************************/
-
-processCallbackQueue(µm.onBeforeStartQueue, function() {
-    // TODO: Promisify
-    let count = 2;
-    const countdown = ( ) => {
-        count -= 1;
-        if ( count !== 0 ) { return; }
-        onPSLReady();
-    };
-
-    µm.publicSuffixList.load(countdown);
-    µm.loadUserSettings(countdown);
-});
-
-/******************************************************************************/
-
 })();
 
 /******************************************************************************/

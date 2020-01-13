@@ -19,14 +19,12 @@
     Home: https://github.com/gorhill/uMatrix
 */
 
-/* global chrome, µMatrix */
-
 'use strict';
 
 /******************************************************************************/
 
-(function() {
-    var µm = µMatrix;
+{
+    const µm = µMatrix;
     µm.pMatrix = new µm.Matrix();
     µm.pMatrix.setSwitch('matrix-off', 'about-scheme', 1);
     µm.pMatrix.setSwitch('matrix-off', 'chrome-extension-scheme', 1);
@@ -42,6 +40,7 @@
     // Global rules
     µm.pMatrix.setSwitch('referrer-spoof', '*', 1);
     µm.pMatrix.setSwitch('noscript-spoof', '*', 1);
+    µm.pMatrix.setSwitch('cname-reveal', '*', 1);
     µm.pMatrix.setCell('*', '*', '*', µm.Matrix.Red);
     µm.pMatrix.setCell('*', '*', 'css', µm.Matrix.Green);
     µm.pMatrix.setCell('*', '*', 'image', µm.Matrix.Green);
@@ -52,100 +51,13 @@
 
     µm.tMatrix = new µm.Matrix();
     µm.tMatrix.assign(µm.pMatrix);
-})();
+}
 
 /******************************************************************************/
 
 µMatrix.hostnameFromURL = function(url) {
     var hn = this.URI.hostnameFromURI(url);
     return hn === '' ? '*' : hn;
-};
-
-µMatrix.scopeFromURL = µMatrix.hostnameFromURL;
-
-/******************************************************************************/
-
-µMatrix.evaluateURL = function(srcURL, desHostname, type) {
-    var srcHostname = this.URI.hostnameFromURI(srcURL);
-    return this.tMatrix.evaluateCellZXY(srcHostname, desHostname, type);
-};
-
-
-/******************************************************************************/
-
-// Whitelist something
-
-µMatrix.whitelistTemporarily = function(srcHostname, desHostname, type) {
-    this.tMatrix.whitelistCell(srcHostname, desHostname, type);
-};
-
-µMatrix.whitelistPermanently = function(srcHostname, desHostname, type) {
-    if ( this.pMatrix.whitelistCell(srcHostname, desHostname, type) ) {
-        this.saveMatrix();
-    }
-};
-
-/******************************************************************************/
-
-// Auto-whitelisting the `all` cell is a serious action, hence this will be
-// done only from within a scope.
-
-µMatrix.autoWhitelistAllTemporarily = function(pageURL) {
-    var srcHostname = this.URI.hostnameFromURI(pageURL);
-    if ( this.mustBlock(srcHostname, '*', '*') === false ) {
-        return false;
-    }
-    this.tMatrix.whitelistCell(srcHostname, '*', '*');
-    return true;
-};
-
-/******************************************************************************/
-
-// Blacklist something
-
-µMatrix.blacklistTemporarily = function(srcHostname, desHostname, type) {
-    this.tMatrix.blacklistCell(srcHostname, desHostname, type);
-};
-
-µMatrix.blacklistPermanently = function(srcHostname, desHostname, type) {
-    if ( this.pMatrix.blacklist(srcHostname, desHostname, type) ) {
-        this.saveMatrix();
-    }
-};
-
-/******************************************************************************/
-
-// Remove something from both black and white lists.
-
-µMatrix.graylistTemporarily = function(srcHostname, desHostname, type) {
-    this.tMatrix.graylistCell(srcHostname, desHostname, type);
-};
-
-µMatrix.graylistPermanently = function(srcHostname, desHostname, type) {
-    if ( this.pMatrix.graylistCell(srcHostname, desHostname, type) ) {
-        this.saveMatrix();
-    }
-};
-
-/******************************************************************************/
-
-// TODO: Should type be transposed by the caller or in place here? Not an
-// issue at this point but to keep in mind as this function is called
-// more and more from different places.
-
-µMatrix.filterRequest = function(fromURL, type, toURL) {
-    // Block request?
-    var srcHostname = this.hostnameFromURL(fromURL);
-    var desHostname = this.hostnameFromURL(toURL);
-
-    // If no valid hostname, use the hostname of the source.
-    // For example, this case can happen with data URI.
-    if ( desHostname === '' ) {
-        desHostname = srcHostname;
-    }
-
-    // Blocked by matrix filtering?
-    return this.mustBlock(srcHostname, desHostname, type);
 };
 
 /******************************************************************************/
@@ -156,35 +68,6 @@
 
 µMatrix.mustAllow = function(srcHostname, desHostname, type) {
     return this.mustBlock(srcHostname, desHostname, type) === false;
-};
-
-/******************************************************************************/
-
-// Commit temporary permissions.
-
-µMatrix.commitPermissions = function(persist) {
-    this.pMatrix.assign(this.tMatrix);
-    if ( persist ) {
-        this.saveMatrix();
-    }
-};
-
-/******************************************************************************/
-
-// Reset all rules to their default state.
-
-µMatrix.revertAllRules = function() {
-    this.tMatrix.assign(this.pMatrix);
-};
-
-/******************************************************************************/
-
-µMatrix.turnOff = function() {
-    vAPI.app.start();
-};
-
-µMatrix.turnOn = function() {
-    vAPI.app.stop();
 };
 
 /******************************************************************************/
